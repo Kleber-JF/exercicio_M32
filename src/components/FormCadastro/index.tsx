@@ -13,7 +13,7 @@ const FormAdicionar = () => {
 
   const cadastrarContato = (evento: FormEvent) => {
     evento.preventDefault()
-    if (nome.split(' ').length > 1) {
+    if (nome.split(' ').length > 1 && telefone.length > 11) {
       dispatch(
         cadastrar({
           nome,
@@ -25,7 +25,9 @@ const FormAdicionar = () => {
       setEmail('')
       setTelefone('')
     } else {
-      alert('O nome precisa ser completo')
+      alert(
+        'O nome precisa ser completo ou o telefone precisa ter no minimo 10 dígitos (incluindo o DDD)'
+      )
     }
   }
 
@@ -47,11 +49,12 @@ const FormAdicionar = () => {
         />
         <InputGeral
           as={ReactInputMask}
-          mask="(99)99999-9999"
+          mask={'(99)99999-9999'}
           value={telefone}
           onChange={(evento) => setTelefone(evento.target.value)}
           type="text"
           placeholder="Telefone"
+          maskChar={''}
         />
         <Botao type="submit">Cadastrar</Botao>
       </FormGeral>

@@ -38,6 +38,11 @@ const contatoSlice = createSlice({
       state.contatos = state.contatos.filter(
         (contato) => contato.telefone !== action.payload
       )
+      state.contatos.sort(function (x, y) {
+        const a = x.nome.toUpperCase()
+        const b = y.nome.toUpperCase()
+        return a == b ? 0 : a > b ? 1 : -1
+      })
     },
     editar: (state, action: PayloadAction<Contato>) => {
       const indexContato = state.contatos.findIndex(
@@ -46,6 +51,11 @@ const contatoSlice = createSlice({
       if (indexContato >= 0) {
         state.contatos[indexContato] = action.payload
       }
+      state.contatos.sort(function (x, y) {
+        const a = x.nome.toUpperCase()
+        const b = y.nome.toUpperCase()
+        return a == b ? 0 : a > b ? 1 : -1
+      })
     }
   }
 })
